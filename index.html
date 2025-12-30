@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6b82e6, #764ba2, #dd55ec, #4facfe, #00f2fe);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        overflow-x: hidden;
+        position: relative;
+        min-height: 100vh;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .sparkle {
+        position: fixed;
+        width: 3px;
+        height: 3px;
+        background: white;
+        border-radius: 50%;
+        animation: sparkleAnim 2s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes sparkleAnim {
+        0% { opacity: 0; transform: scale(0); }
+        50% { opacity: 0.6; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0); }
+    }
+
+    .heart {
+        position: fixed;
+        bottom: -50px;
+        color: #ff2e63;
+        animation: floatUp 8s ease-in-out infinite;
+        font-size: 25px;
+        filter: drop-shadow(0 0 6px rgba(255, 46, 99, 0.6));
+        z-index: 1;
+    }
+
+    @keyframes floatUp {
+        0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(1); }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; transform: translateY(-120vh) rotate(360deg) scale(1.4); }
+    }
+
+    .hero {
+        text-align: center;
+        padding: 10vw 5% 5vw;
+        color: white;
+        position: relative;
+        z-index: 10;
+    }
+
+    .hero h1 {
+        font-family: 'Great Vibes', cursive;
+        font-size: clamp(2.5rem, 8vw, 4.2rem);
+        text-shadow: 0 0 8px rgba(237, 111, 197, 0.527), 0 0 15px rgba(255,255,255,0.3);
+        background: linear-gradient(45deg, #181717, #3d252b, #fff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientText 4s ease infinite, titleGlow 3s ease-in-out infinite alternate;
+        margin-bottom: 1rem;
+    }
+
+    @keyframes titleGlow {
+        from { filter: drop-shadow(0 0 4px white); }
+        to { filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+    }
+
+    @keyframes gradientText {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .hero h2 {
+        font-size: clamp(1rem, 3vw, 1.8rem);
+        font-weight: 300;
+        letter-spacing: 0.2rem;
+        text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        animation: fadeInUp 2s ease;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .carousel {
+        width: 90%;
+        max-width: 600px;
+        margin: 5vw auto;
+        perspective: 1000px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .carousel-inner {
+        width: 100%;
+        padding-bottom: 75%;
+        border-radius: 30px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        animation: float 4s ease-in-out infinite;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    @keyframes float {
+        0%,100% { transform: translateY(0px); }
+        50% { transform: translateY(-18px); }
+    }
+
+    .carousel img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30px;
+        opacity: 0;
+        transition: opacity 1.4s ease-in-out;
+    }
+
+    .carousel img.active {
+        opacity: 1;
+    }
+
+    .timeline {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(18px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        width: 90%;
+        max-width: 800px;
+        margin: 5vw auto;
+        padding: 5vw;
+        border-radius: 30px;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+    }
+
+    .timeline h2 {
+        text-align: center;
+        color: white;
+        font-size: clamp(1.5rem, 5vw, 2.3rem);
+        margin-bottom: 2rem;
+        text-shadow: 0 0 14px rgba(255,255,255,0.7);
+    }
+
+    .timeline-item {
+        color: white;
+        background: rgba(255,255,255,0.1);
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 15px;
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        transition: 0.3s;
+    }
+
+    .timeline-item:hover {
+        transform: translateX(8px);
+        background: rgba(255,255,255,0.18);
+        box-shadow: 0 8px 25px rgba(255,255,255,0.25);
+    }
+
+    .message-box {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(20px);
+        border: 2px solid rgba(255,255,255,0.25);
+        font-size: clamp(1rem, 3vw, 1.35rem);
+        color: white;
+        padding: 5vw;
+        margin: 5vw auto;
+        width: 90%;
+        max-width: 800px;
+        border-radius: 30px;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+        line-height: 1.8;
+        text-align: center;
+    }
+
+    .message-box strong {
+        color: #ffd1dc;
+        text-shadow: 0 0 12px rgba(255,255,255,0.7);
+    }
+
+    .footer {
+        text-align: center;
+        color: white;
+        padding: 3vw 2vw;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        text-shadow: 0 0 8px rgba(255,255,255,0.5);
+    }
+
+</style>
+</head>
+
+<body>
+
+<!-- 🔊 Background Music -->
+<audio id="bgm" src="assets/music/melodia-del-alma-422117.mp3" autoplay loop hidden></audio>
+
+<!-- Sparkles -->
+<script>
+setInterval(() => {
+    let s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.top = Math.random() * 100 + "vh";
+    s.style.animationDelay = Math.random() * 2 + "s";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 2000);
+}, 200);
+</script>
+
+<!-- Floating Hearts -->
+<script>
+setInterval(() => {
+    let h = document.createElement("div");
+    h.innerHTML = "💖";
+    h.className = "heart";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (Math.random() * 20 + 15) + "px";
+    h.style.animationDuration = (Math.random() * 4 + 6) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 9000);
+}, 450);
+</script>
+
+
+<script>
+setInterval(() => {
+    let h = document.createElement("div");
+    h.innerHTML = "✨";
+    h.className = "sparkle";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (Math.random() * 20 + 15) + "px";
+    h.style.animationDuration = (Math.random() * 4 + 6) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 9000);
+}, 450);
+</script>
+
+<div class="hero">
+    <h1>Happy Birthday ❤️</h1>
+    <h2>Cakiee</h2>
+</div>
+
+<div class="carousel">
+    <div class="carousel-inner">
+        <img src="assets/photos/photo4.png" class="active">
+        <img src="assets/photos/photo2.jpeg">
+        <img src="assets/photos/photo3.png">
+    </div>
+</div>
+
+<script>
+let pics = document.querySelectorAll('.carousel img');
+let index = 0;
+
+setInterval(() => {
+    pics[index].classList.remove("active");
+    index = (index + 1) % pics.length;
+    pics[index].classList.add("active");
+}, 3500);
+</script>
+
+
+<!--
+<div class="timeline">
+    <h2>❤️ Your Beautiful Journey ❤️</h2>
+    <div class="timeline-item">✨ First met and felt the magic</div>
+    <div class="timeline-item">✨ Fell in love & created memories</div>
+    <div class="timeline-item">✨ Supported each other in every moment</div>
+    <div class="timeline-item">✨ Built a bond stronger than ever</div>
+    <div class="timeline-item">✨ Today — Celebrating One Year of Love ❤️</div>
+</div>
+-->
+<div class="message-box">
+    <strong>Dear Cupcake,</strong><br><br>
+    Wishing you a very <strong>Happy Birthday!</strong><br>
+    I hope today brings you peace, smiles and happiness.<br><br>
+    You are an incredible person and I feel so lucky to have you in my life. May this year be filled with love, success, and all the things that make you happy.<br><br>
+    Enjoy your special day to the fullest!<br><br>
+    Waiting for your treat. 😉🎂<br><br>
+    again happy birthday! and a very happy new year🎉 🎈<br><br>
+
+    — Souhardya
+</div>
+
+<div class="footer">Made with ❤️ by Souhardya</div>
+
+<script>
+document.addEventListener("click", function () {
+    const bgm = document.getElementById("bgm");
+    bgm.volume = 1; // 35% volume
+    bgm.play().catch(err => console.log(err));
+}, { once: true });
+</script>
+
+</body>
+</html>
